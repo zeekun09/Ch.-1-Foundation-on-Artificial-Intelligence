@@ -1,0 +1,82 @@
+Assignment 1 No. 2
+
+Paper Money: <br>
+1. Rp 100,000    
+2. Rp 50,000   
+3. Rp 20,000   
+4. Rp 10,000   
+5. Rp 5,000   
+6. Rp 2,000
+<br>
+<br>
+Coins: <br>
+1. Rp 1,000  
+2. Rp 500  
+3. Rp 200
+4. Rp 100  
+*To make it easier, we assume that all Rp. 1000 denominations are coins.
+
+There are circumstances where the bank must liquidate all customer savings in the form of money, if the customer requests it.
+And imagine this is happening right now in front of you, help the bank to calculate how many denominations of money are needed.
+
+Here is the rule:
+
+1. Bank must prioritize the largest denominations first to be issued.
+2. If there is a balance that cannot be cashed, the bank must inform it.
+3. Bank must calculate how many number of Paper Money needed and Coins needed.
+4. Banks can only disburse a maximum amount of 1 billion Rupiah
+
+
+
+Make a python code that receives an integer number of customer savings from 0 - 1 Billions.
+
+#Create command to get input from user, the input should be integer
+
+num = int(input("Enter an integer: "))
+print("You entered:", num)
+
+#Create the code here
+def liquidate_savings(savings):
+    if savings < 0 or savings > 1_000_000_000:
+        return "Invalid amount. Savings must be between 0 and 1 billion Rupiah."
+
+    denominations = {
+        "Rp 100,000": 100_000,
+        "Rp 50,000": 50_000,
+        "Rp 20,000": 20_000,
+        "Rp 10,000": 10_000,
+        "Rp 5,000": 5_000,
+        "Rp 2,000": 2_000,
+        "Rp 1,000": 1_000,
+        "Rp 500": 500,
+        "Rp 200": 200,
+        "Rp 100": 100
+    }
+
+    paper_money_count = 0
+    coin_count = 0
+    result = []
+
+    for denom, value in denominations.items():
+        count = savings // value
+        savings -= count * value
+
+        if value >= 2_000:  # Paper money
+            paper_money_count += count
+        else:  # Coins
+            coin_count += count
+
+        result.append(f"amount of currency {denom}: {count}")
+
+    result.append(f"\nTotal Paper Money: {paper_money_count}")
+    result.append(f"Total Coins: {coin_count}")
+    result.append(f"\nCannot be cashed out: {savings}")
+
+    return "\n".join(result)
+
+
+# Example usage
+customer_savings = num  # Enter the customer savings amount here
+output = liquidate_savings(customer_savings)
+print(output)
+

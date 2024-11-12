@@ -1,1 +1,1 @@
-# Ch.-1-Foundation-on-Artificial-Intelligence-No.-2
+# Ch.-1-Foundation-on-Artificial-Intelligence
